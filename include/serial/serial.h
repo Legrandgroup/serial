@@ -44,6 +44,7 @@
 #include <exception>
 #include <stdexcept>
 #include <serial/v8stdint.h>
+#include "serial/serial_api.h"
 
 #define THROW(exceptionClass, message) throw exceptionClass(__FILE__, \
 __LINE__, (message) )
@@ -53,7 +54,7 @@ namespace serial {
 /*!
  * Enumeration defines the possible bytesizes for the serial port.
  */
-typedef enum {
+typedef LIBSERIAL_API enum {
   fivebits = 5,
   sixbits = 6,
   sevenbits = 7,
@@ -63,7 +64,7 @@ typedef enum {
 /*!
  * Enumeration defines the possible parity types for the serial port.
  */
-typedef enum {
+typedef LIBSERIAL_API enum {
   parity_none = 0,
   parity_odd = 1,
   parity_even = 2,
@@ -74,7 +75,7 @@ typedef enum {
 /*!
  * Enumeration defines the possible stopbit types for the serial port.
  */
-typedef enum {
+typedef LIBSERIAL_API enum {
   stopbits_one = 1,
   stopbits_two = 2,
   stopbits_one_point_five
@@ -83,7 +84,7 @@ typedef enum {
 /*!
  * Enumeration defines the possible flowcontrol types for the serial port.
  */
-typedef enum {
+typedef LIBSERIAL_API enum {
   flowcontrol_none = 0,
   flowcontrol_software,
   flowcontrol_hardware
@@ -99,7 +100,7 @@ struct Timeout {
 #ifdef max
 # undef max
 #endif
-  static uint32_t max() {return std::numeric_limits<uint32_t>::max();}
+  static LIBSERIAL_API uint32_t max() {return std::numeric_limits<uint32_t>::max();}
   /*!
    * Convenience function to generate Timeout structs using a
    * single absolute timeout.
@@ -109,7 +110,7 @@ struct Timeout {
    *
    * \return Timeout struct that represents this simple timeout provided.
    */
-  static Timeout simpleTimeout(uint32_t timeout) {
+  static LIBSERIAL_API Timeout simpleTimeout(uint32_t timeout) {
     return Timeout(max(), timeout, 0, timeout, 0);
   }
 
@@ -128,7 +129,7 @@ struct Timeout {
    */
   uint32_t write_timeout_multiplier;
 
-  explicit Timeout (uint32_t inter_byte_timeout_=0,
+  explicit LIBSERIAL_API Timeout (uint32_t inter_byte_timeout_=0,
                     uint32_t read_timeout_constant_=0,
                     uint32_t read_timeout_multiplier_=0,
                     uint32_t write_timeout_constant_=0,
@@ -144,7 +145,7 @@ struct Timeout {
 /*!
  * Class that provides a portable serial port interface.
  */
-class Serial {
+class LIBSERIAL_API Serial {
 public:
   /*!
    * Creates a Serial object and opens the port if a port is specified,
@@ -667,7 +668,7 @@ private:
 
 };
 
-class SerialException : public std::exception
+class LIBSERIAL_API SerialException : public std::exception
 {
   // Disable copy constructors
   SerialException& operator=(const SerialException&);
@@ -685,7 +686,7 @@ public:
   }
 };
 
-class IOException : public std::exception
+class LIBSERIAL_API IOException : public std::exception
 {
   // Disable copy constructors
   IOException& operator=(const IOException&);
@@ -724,7 +725,7 @@ public:
   }
 };
 
-class PortNotOpenedException : public std::exception
+class LIBSERIAL_API PortNotOpenedException : public std::exception
 {
   // Disable copy constructors
   const PortNotOpenedException& operator=(PortNotOpenedException);
@@ -766,7 +767,7 @@ struct PortInfo {
  * \return vector of serial::PortInfo.
  */
 std::vector<PortInfo>
-list_ports();
+LIBSERIAL_API list_ports();
 
 } // namespace serial
 

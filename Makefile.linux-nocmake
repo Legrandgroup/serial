@@ -1,0 +1,19 @@
+CXXFLAGS = -g -O0 -Wall -fPIC -pedantic -Iinclude
+LDFLAGS = 
+
+EXEC = libserialcpp.so
+OBJECTFILES = src/serial.o \
+	src/impl/unix.o src/impl/list_ports/list_ports_linux.o
+
+CLEANFILES = $(OBJECTFILES) $(EXEC)
+
+all: $(EXEC)
+
+$(EXEC): $(OBJECTFILES)
+	$(CXX) $(CXXFLAGS) -shared $^ -o $@
+
+%.o: %.cc
+	$(CXX) $(CXXFLAGS) -c -o $@ $^ $(CCFLAGS)
+
+clean:
+	rm -f $(CLEANFILES)
