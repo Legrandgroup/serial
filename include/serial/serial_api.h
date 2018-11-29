@@ -1,8 +1,8 @@
 /**
-* \file dbmanagerapi.hpp
+* \file serial_api.hpp
 * \brief Preprocessor defines (class prefixes) to compile DLLs under Windows
 *
-* This header must be included to properly define LIBDBMANAGER_API in the remaining API headers
+* This header must be included to properly define LIBSERIAL_API in the remaining API headers
 */
 
 #ifndef _SERIALAPI_HPP_
