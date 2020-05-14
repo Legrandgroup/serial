@@ -1,7 +1,7 @@
 CXXFLAGS = -O3 -Wall -fPIC -pedantic -Iinclude
 LDFLAGS = 
 
-EXEC = libserialcpp.so
+EXEC = libserial.so
 OBJECTFILES = src/serial.o \
 	src/impl/unix.o src/impl/list_ports/list_ports_linux.o
 
